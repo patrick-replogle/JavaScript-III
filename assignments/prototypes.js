@@ -36,15 +36,15 @@ GameObject.prototype.destroy = function(){
 
 const CharacterStats = function(stats){
   this.healthPoints = stats.healthPoints;
-  this.takeDamage = stats.takeDamage;
   GameObject.call(this, stats);
 };
 
 CharacterStats.prototype = Object.create(GameObject.prototype);
 
 CharacterStats.prototype.takeDamage = function(){
-  return `${this.name} took Damage.`;
+  return `${this.name} took damage.`;
 };
+
 
 
 /*
@@ -60,7 +60,7 @@ CharacterStats.prototype.takeDamage = function(){
 const Humanoid = function(attributes){
   this.team = attributes.team;
   this.weapons = attributes.weapons;
-  this.language = attributes.language;
+  this.language = attributes.language
   CharacterStats.call(this, attributes);
 };
 
