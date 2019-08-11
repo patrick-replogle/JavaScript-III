@@ -78,13 +78,18 @@ Humanoid.prototype.greet = function(){
 const Hero = function(attributes){
   this.armor = attributes.armor;
   this.attack = attributes.attack;
+  this.enemyHealth = attributes.enemyHealth;
   Humanoid.call(this, attributes);
 };
 
 Hero.prototype = Object.create(Humanoid.prototype);
 
+// Hero.prototype.attack = function(){
+//   return (this.enemyHealth = this.enemyHealth - this.attack);
+// };
+
 Hero.prototype.slashed = function(){
-  console.log(this.healthPoints = this.healthPoints - this.attack);
+  console.log(this.healthPoints = this.healthPoints + this.armor - this.attack);
   if(this.healthPoints <= 0){
     return `${this.name} is dead!`
   }
@@ -93,13 +98,14 @@ Hero.prototype.slashed = function(){
 const Villain = function(attributes){
   this.armor = attributes.armor;
   this.attack = attributes.attack;
+  this.enemyHealth = attributes.enemyHealth;
   Humanoid.call(this, attributes);
 };
 
 Villain.prototype = Object.create(Humanoid.prototype);
 
 Villain.prototype.damaged = function(){
-  console.log(this.healthPoints = this.healthPoints - this.attack);
+  console.log(this.healthPoints = this.healthPoints + this.armor - this.attack);
   if(this.healthPoints <= 0){
     return `${this.name} is dead!`
   }
@@ -178,7 +184,7 @@ Villain.prototype.damaged = function(){
       'Bow',
     ],
     language: 'Old English',
-    armor: 'Chainmail',
+    armor: 3,
     attack: 6,
     enemyHealth: 50
   });
@@ -198,7 +204,7 @@ Villain.prototype.damaged = function(){
       'Fire Breathing Skulls',
     ],
     language: 'Necronomicon',
-    armor: 'Death Robes',
+    armor: 3,
     attack: 6,
     enemyHealth: 50
   });
@@ -216,11 +222,11 @@ Villain.prototype.damaged = function(){
   console.log(evilKnight.damaged());
   console.log(knight.slashed());
   console.log(evilKnight.damaged());
-
-  
-  
-
-
+  console.log(knight.slashed());
+  console.log(evilKnight.damaged());
+  console.log(knight.slashed());
+  console.log(evilKnight.damaged());
+ 
   // Stretch task: 
   // * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.  
   // * Give the Hero and Villains different methods that could be used to remove health points from objects which could result in destruction if health gets to 0 or drops below 0;
