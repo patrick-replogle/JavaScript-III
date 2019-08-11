@@ -26,7 +26,6 @@ GameObject.prototype.destroy = function(){
   return `${this.name} was removed from the game.`;
 };
 
-
 /*
   === CharacterStats ===
   * healthPoints
@@ -44,8 +43,6 @@ CharacterStats.prototype = Object.create(GameObject.prototype);
 CharacterStats.prototype.takeDamage = function(){
   return `${this.name} took damage.`;
 };
-
-
 
 /*
   === Humanoid (Having an appearance or character resembling that of a human.) ===
@@ -77,6 +74,40 @@ Humanoid.prototype.greet = function(){
   * Instances of Humanoid should have all of the same properties as CharacterStats and GameObject.
   * Instances of CharacterStats should have all of the same properties as GameObject.
 */
+
+const Hero = function(attributes){
+  this.armor = attributes.armor;
+  this.attack = attributes.attack;
+  Humanoid.call(this, attributes);
+};
+
+Hero.prototype = Object.create(Humanoid.prototype);
+
+Hero.prototype.slashed = function(){
+  console.log(this.healthPoints = this.healthPoints - this.attack);
+  if(this.healthPoints <= 0){
+    return `${this.name} is dead!`
+  }
+};
+
+const Villain = function(attributes){
+  this.armor = attributes.armor;
+  this.attack = attributes.attack;
+  Humanoid.call(this, attributes);
+};
+
+Villain.prototype = Object.create(Humanoid.prototype);
+
+Villain.prototype.damaged = function(){
+  console.log(this.healthPoints = this.healthPoints - this.attack);
+  if(this.healthPoints <= 0){
+    return `${this.name} is dead!`
+  }
+};
+
+// Villain.prototype.attack = function(){
+//   return (this.enemyHealth = this.enemyHealth - this.attack);
+// };
 
 // Test you work by un-commenting these 3 objects and the list of console logs below:
 
@@ -114,6 +145,7 @@ Humanoid.prototype.greet = function(){
     language: 'Common Tongue',
   });
 
+
   const archer = new Humanoid({
     createdAt: new Date(),
     dimensions: {
@@ -131,6 +163,46 @@ Humanoid.prototype.greet = function(){
     language: 'Elvish',
   });
 
+    const knight = new Hero({
+    createdAt: new Date(),
+    dimensions: {
+      length: 1,
+      width: 2,
+      height: 4,
+    },
+    healthPoints: 10,
+    name: 'Burt',
+    team: 'The Good Guys',
+    weapons: [
+      'Sword',
+      'Bow',
+    ],
+    language: 'Old English',
+    armor: 'Chainmail',
+    attack: 6,
+    enemyHealth: 50
+  });
+
+    const evilKnight = new Villain({
+    createdAt: new Date(),
+    dimensions: {
+      length: 1,
+      width: 2,
+      height: 4,
+    },
+    healthPoints: 10,
+    name: 'Drago',
+    team: 'The Bad Guys',
+    weapons: [
+      'Morning Star',
+      'Fire Breathing Skulls',
+    ],
+    language: 'Necronomicon',
+    armor: 'Death Robes',
+    attack: 6,
+    enemyHealth: 50
+  });
+
   console.log(mage.createdAt); // Today's date
   console.log(archer.dimensions); // { length: 1, width: 2, height: 4 }
   console.log(swordsman.healthPoints); // 15
@@ -141,6 +213,12 @@ Humanoid.prototype.greet = function(){
   console.log(archer.greet()); // Lilith offers a greeting in Elvish.
   console.log(mage.takeDamage()); // Bruce took damage.
   console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
+  console.log(evilKnight.damaged());
+  console.log(knight.slashed());
+  console.log(evilKnight.damaged());
+
+  
+  
 
 
   // Stretch task: 
