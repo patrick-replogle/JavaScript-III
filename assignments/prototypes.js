@@ -84,14 +84,16 @@ const Hero = function(attributes){
 
 Hero.prototype = Object.create(Humanoid.prototype);
 
-// Hero.prototype.attack = function(){
-//   return (this.enemyHealth = this.enemyHealth - this.attack);
-// };
+Hero.prototype.fight = function() {
+  return `${this.name} has entered a duel with the evil Drago!`;
+}
 
 Hero.prototype.slashed = function(){
-  console.log(this.healthPoints = this.healthPoints + this.armor - this.attack);
+  this.healthPoints = this.healthPoints + this.armor - this.attack;
   if(this.healthPoints <= 0){
     return `${this.name} is dead!`
+  } else {
+    return `${this.name} was slashed. Life bar = ${this.healthPoints}/10 left`;
   }
 };
 
@@ -105,9 +107,11 @@ const Villain = function(attributes){
 Villain.prototype = Object.create(Humanoid.prototype);
 
 Villain.prototype.damaged = function(){
-  console.log(this.healthPoints = this.healthPoints + this.armor - this.attack);
+  this.healthPoints = this.healthPoints + this.armor - this.attack;
   if(this.healthPoints <= 0){
     return `${this.name} is dead!`
+  } else {
+    return `${this.name} was slashed. Life bar = ${this.healthPoints}/10 left`;
   }
 };
 
@@ -219,6 +223,7 @@ Villain.prototype.damaged = function(){
   console.log(archer.greet()); // Lilith offers a greeting in Elvish.
   console.log(mage.takeDamage()); // Bruce took damage.
   console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
+  console.log(knight.fight());
   console.log(evilKnight.damaged());
   console.log(knight.slashed());
   console.log(evilKnight.damaged());
